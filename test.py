@@ -1,71 +1,31 @@
-import time
-import os
+import streamlit as st
 
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
+st.title("Välkommen till hälsokollen! 💬")
 
-print('Hej! Välkommen till programmet. \nSvara på frågorna.')
-time.sleep(2)
+st.write("Fyll i uppgifterna nedan:")
 
-#Namn variabler
-name_first = input("Förnamn: ").strip().title()
-name_second = input("Efternamn: ").strip().title()
+# Namn med formatering
+name_first = st.text_input("Förnamn").strip().capitalize()
+name_second = st.text_input("Efternamn").strip().capitalize()
 
-print(f"Tack {name_first} {name_second}!")
-time.sleep(2)
-print(f"Nu ska du, {name_first}, få några olika alternativ att besvara")
-time.sleep(2)
+# Ålder, vikt, längd
+age = st.text_input("Hur gammal är du? (år)")
+weight = st.text_input("Hur mycket väger du? (kg)")
+height = st.text_input("Hur lång är du? (cm)")
 
-clear()
+# När allt är ifyllt – visa sammanfattning
+if name_first and name_second and age and weight and height:
+    st.success("✅ Alla uppgifter är ifyllda!")
+    st.write("---")
+    st.subheader("Din information:")
+    st.write(f"👤 Namn: {name_first} {name_second}")
+    st.write(f"📅 Ålder: {age} år")
+    st.write(f"⚖ Vikt: {weight} kg")
+    st.write(f"📏 Längd: {height} cm")
 
-#variabler
-age = None
-weight = None
-height = None
+    # (valfritt) visa varning
+    st.warning("⚠️ Detta kännetecknar extrem övervikt för din ålder.")
+    st.error("🚨 Sök hjälp!")
 
-while True:
-
-    print(f"1. Ålder: ({age if age else 'Obesvarad'})")
-    print(f"2. Vikt: ({weight if weight else 'Obesvarad'})")
-    print(f"3. Längd: ({height if height else 'Obesvarad'})")
-    print(f"4. Avsluta")
-
-    choice = input("Välj alternativ 1-4: ")
-
-    if choice == "1":
-        age = input("Hur gammal är du? ")
-        time.sleep(1)
-        clear()
-    elif choice == "2":
-        weight = input("Hur mycket väger du? (Kg) ")
-        time.sleep(1)
-        clear()
-    elif choice == "3":
-        height = input("Hur lång är du? (Cm) ")
-        time.sleep(1)
-        clear()
-    elif choice == "4":
-        break
-        clear()
-    else:
-        print("Ogiltigt val. Försök igen")
-        time.sleep(2)
-        clear()
-
-    if age and weight and height:
-        print("Alla uppgifter är besvarade")
-        time.sleep(2)
-        break
-
-clear()
-
-print(f"Här kommer information om dig")
-time.sleep(2)
-print(f"{name_first} {name_second}:")
-print(f"Du är {age if age else '-'} år gammal. \nDu väger {weight if weight else '-'} kg \nDu är {height if height else '-'} cm lång.")
-time.sleep(4)
-
-print("Varning! Detta kännetecknar extrem övervikt för din ålder.")
-time.sleep(3)
-print("Sök hjälp!")
-time.sleep(3)
+else:
+    st.info("👉 Fyll i alla fält för att få en sammanställning.")
