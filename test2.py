@@ -15,9 +15,8 @@ height = st.text_input("Hur lång är du? (cm)")
 
 # När allt är ifyllt – visa sammanfattning
 if name_first and name_second and age and weight and height:
-    st.success("✅ Alla uppgifter är ifyllda! ⬇️Scrolla ner för att se din sammanställda information")
+    st.success("✅ Alla uppgifter är ifyllda! \n⬇️Scrolla ner för att se din sammanställda information")
     st.write("---")
-    st.write("⬇️Scrolla ner för att se din sammanställda information")
     st.subheader("Din information:")
     st.write(f"👤 Namn: {name_first} {name_second}")
     st.write(f"📅 Ålder: {age} år")
